@@ -31,7 +31,7 @@ app.get('/repos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
   //{'forks_count': { $lt: 4}}
-  db.Repo.find({'user': 'enague'})
+  db.Repo.find({'forks': {$lt: 4}})
   .then((data) => {
   	res.send(data);
   })
