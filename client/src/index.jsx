@@ -11,6 +11,24 @@ class App extends React.Component {
       repos: []
     }
 
+
+  }
+
+  getRepos(term) {
+
+    $.ajax({
+      type: 'GET',
+      url: '/repos',
+      success: (data) => {
+        console.log('data from getRepos', data)
+        this.setState({
+          repos: data
+        })
+      },
+      error: (error) => {
+        console.log('error from getRepos', error)
+      }
+    })
   }
 
   search (term) {
@@ -21,14 +39,17 @@ class App extends React.Component {
       url: '/repos',
       data: {term},
       success: (data) => {
-        console.log('data:',data)
-
+        console.log('data:', data)
+        this.getRepos(term);
       },
       error: (error) => {
-        console.log(error)
+        console.log('error from search', error)
       }
     })
   }
+
+
+
 
   render () {
     return (<div>

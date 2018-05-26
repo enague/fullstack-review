@@ -13,7 +13,6 @@ let Repo = mongoose.model('Repo', repoSchema);
 
 let save = (newUser) => {
   // This function should save a repo or repos to MongoDB
-  console.log(newUser[0]['owner']['id'])
   for(var i = 0; i < newUser.length; i++) {
 	  var user = new Repo({
 	  	'user': newUser[i]['owner']['login'],
@@ -23,10 +22,11 @@ let save = (newUser) => {
 	  })
 
 	  user.save(function(err,product) {
-	  	console.log(product);
+	  	console.log('saved to MongoDB');
 	  })
   }
 
 }
 
 module.exports.save = save;
+module.exports.Repo = Repo;
